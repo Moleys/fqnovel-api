@@ -1,0 +1,34 @@
+name: Build and Deploy fqnovel-api
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Rust environment
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: wasm32-unknown-unknown
+        profile: minimal
+
+    - name: Install Dependencies
+      run: cargo install -q worker-build
+
+    - name: Build Worker
+      run: worker-build --release
+
+    - name: Deploy Worker (Optional)
+      # If you have a deployment step, add it here
+      run: echo "Deploy step (optional)"
