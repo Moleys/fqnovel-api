@@ -29,8 +29,11 @@ jobs:
     - name: Build Worker
       run: worker-build --release
 
+    - name: List Files in Build Directory
+      run: ls -R target/release
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-output
-        path: path/to/your/built/files
+        path: target/release
