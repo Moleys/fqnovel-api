@@ -29,6 +29,8 @@ jobs:
     - name: Build Worker
       run: worker-build --release
 
-    - name: Deploy Worker (Optional)
-      # If you have a deployment step, add it here
-      run: echo "Deploy step (optional)"
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-output
+        path: path/to/your/built/files
